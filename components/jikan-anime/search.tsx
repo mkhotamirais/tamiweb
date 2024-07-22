@@ -8,6 +8,7 @@ import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
 export const Search = () => {
   const { setPage, keyword, setKeyword, searchBox, hideSearchBox } = useJikanAnimeStore();
   const searchRef = useRef<HTMLInputElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const router = useRouter();
 
@@ -19,6 +20,9 @@ export const Search = () => {
       router.push(`/jikan-anime`);
     }
     if (searchBox) hideSearchBox();
+    if (buttonRef.current) {
+      buttonRef.current.focus();
+    }
     setPage(1);
   };
 
@@ -31,7 +35,7 @@ export const Search = () => {
   useEffect(() => {
     if (searchBox && searchRef?.current) {
       searchRef.current.focus();
-    } else if (searchRef?.current) {
+    } else if (!searchBox && searchRef?.current) {
       searchRef.current.blur();
     }
   }, [searchBox]);
@@ -45,7 +49,7 @@ export const Search = () => {
     >
       <div className="flex mt-1 sm:mt-0 rounded-xl overflow-hidden bg-jikan-primary sm:bg-jikan-secondary">
         <input
-          ref={searchBox ? searchRef : null}
+          ref={searchRef}
           type="search"
           className="bg-inherit w-full p-2 focus:outline-none"
           value={keyword}
@@ -54,6 +58,7 @@ export const Search = () => {
           onFocus={handleFocus}
         />
         <button
+          ref={buttonRef}
           typeof="button"
           title="search"
           type="submit"

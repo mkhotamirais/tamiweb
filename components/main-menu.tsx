@@ -11,11 +11,17 @@ export default function MainMenu() {
   const onMouseEnter = () => {
     mm ? hideMm() : showMm();
   };
+
+  const onClick = () => {
+    if (mm) hideMm();
+  };
+
   return (
     <div
+      onClick={onClick}
       className={`${
-        mm ? "bottom-1" : "-bottom-1/2"
-      } bg-gray-300 z-50 border-t fixed inset-x-1 rounded-xl transition-all`}
+        mm ? "translate-y-0 bottom-1" : "translate-y-full bottom-0"
+      } bg-indigo-500/50 z-50 border-t fixed inset-x-1 rounded-xl transition-all`}
     >
       <Button
         onMouseEnter={onMouseEnter}
@@ -34,9 +40,9 @@ export default function MainMenu() {
             <Link href="/auth/login">Login</Link>
           </Button>
         </nav>
-        <div className="bg-white border flex-grow m-1 mt-0 rounded-lg h-[40vh] p-1 px-2">
+        <div className="bg-white border flex-grow m-1 mt-0 rounded-lg max-h-[50vh] p-1 px-2">
           <div>
-            <h3 className="text-xl font-medium">Public Api</h3>
+            <h3 className="text-xl font-medium mb-3">Public Api</h3>
             <div className="flex flex-col capitalize gap-2 justify-start">
               {menu.map((item, i) => (
                 <Link key={i} href={item.href} className="text-sm hover:underline">

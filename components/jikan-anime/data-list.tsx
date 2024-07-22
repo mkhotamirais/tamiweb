@@ -23,6 +23,7 @@ export const DataList = ({ data }: { data: AnimeList["data"] }) => {
                 alt="..."
                 className="z-10 absolute w-full h-full object-center object-cover"
                 priority
+                quality={70}
               />
             </Link>
           );
