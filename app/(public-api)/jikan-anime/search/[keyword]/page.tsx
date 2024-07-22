@@ -10,6 +10,8 @@ import { Pagination } from "@/components/jikan-anime/pagination";
 
 export default function SearchKeyword({ params }: { params: { keyword: string } }) {
   const { page, searchResult, setSearchResult } = useJikanAnimeStore();
+  const total = searchResult?.pagination?.items?.total;
+  const last_visible_page = searchResult?.pagination?.last_visible_page;
 
   useEffect(() => {
     const getAnime = async () => {
@@ -26,9 +28,9 @@ export default function SearchKeyword({ params }: { params: { keyword: string } 
       </DataTitle>
       {searchResult?.data ? (
         <>
-          <Pagination lastPage={Number(searchResult?.pagination?.last_visible_page)} />
+          <Pagination total={Number(total)} lastPage={Number(last_visible_page)} />
           <DataList data={searchResult?.data} />
-          <Pagination lastPage={Number(searchResult?.pagination?.last_visible_page)} />
+          <Pagination total={Number(total)} lastPage={Number(last_visible_page)} />
         </>
       ) : (
         <LoaderPulse />

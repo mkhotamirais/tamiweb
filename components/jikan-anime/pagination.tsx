@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
 import { AnimeList } from "@/lib/jikan-anime-types";
 
-export const Pagination = ({ lastPage }: { lastPage: number }) => {
+export const Pagination = ({ lastPage, total }: { lastPage: number; total: number }) => {
   const { page, setPage } = useJikanAnimeStore();
   const [editPage, setEditPage] = useState(false);
   const [newPage, setNewPage] = useState(page);
@@ -54,6 +54,8 @@ export const Pagination = ({ lastPage }: { lastPage: number }) => {
   useEffect(() => {
     setNewPage(page);
   }, [page]);
+
+  if (total === 0) return null;
 
   return (
     <div className="flex gap-1 text-sm py-3">

@@ -1,5 +1,5 @@
 export type AnimeList = {
-  pagination?: { last_visible_page: number };
+  pagination?: { last_visible_page: number; items: { total: number } };
   data: AnimeListData[];
 };
 
