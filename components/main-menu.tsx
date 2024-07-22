@@ -13,7 +13,7 @@ export default function MainMenu() {
   };
 
   const onClick = () => {
-    if (mm) hideMm();
+    mm ? hideMm() : showMm();
   };
 
   return (
