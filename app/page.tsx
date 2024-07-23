@@ -7,6 +7,7 @@ export default function Home() {
       <div className="flex gap-2">
         <Button variant="outline">halo</Button>
         <Button>explore</Button>
+        <button>hello</button>
       </div>
     </div>
   );
