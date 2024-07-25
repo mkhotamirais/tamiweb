@@ -31,7 +31,6 @@ export function RegisterForm() {
     startTransition(() => {
       register(values)
         .then((data) => {
-          console.log(data);
           if (data?.success) {
             setSuccess(data?.success);
           }

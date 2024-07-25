@@ -7,10 +7,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { FaUser } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { LogoutButton } from "./logout-button";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 export function AuthButton({ user }: { user: any }) {
   if (!user) {
@@ -26,17 +25,16 @@ export function AuthButton({ user }: { user: any }) {
       <DropdownMenuTrigger>
         <Avatar>
           <AvatarImage src={user?.image || ""} />
-          <AvatarFallback className="bg-sky-500">
-            {user.email.substring(0, 2)}
-            {/* <FaUser className="text-white" /> */}
-          </AvatarFallback>
+          <AvatarFallback className="bg-sky-500">{user.email.substring(0, 2)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
-          <Link href="/settings" className="w-full text-center">
-            Account
-          </Link>
+          <Button asChild size="sm" variant="link">
+            <Link href="/settings" className="w-full">
+              Account
+            </Link>
+          </Button>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LogoutButton />

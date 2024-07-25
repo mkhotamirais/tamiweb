@@ -1,6 +1,6 @@
 "use server";
 
-import { LoginSchema, NewPasswordSchema, RegisterSchema, ResetSchema } from "@/schemas/authSchema";
+import { LoginSchema, NewPasswordSchema, RegisterSchema, ResetSchema, SettingsSchema } from "@/schemas/authSchema";
 import { z } from "zod";
 import { genSalt, hash, compare } from "bcryptjs";
 import { db } from "@/lib/db";
@@ -9,6 +9,7 @@ import {
   getTwoFactorConfirmationByUserId,
   getTwoFactorTokenByEmail,
   getUserByEmail,
+  getUserById,
   getVerificationTokenByToken,
 } from "@/data/authData";
 import { signIn } from "@/auth";
@@ -17,6 +18,39 @@ import { AuthError } from "next-auth";
 import { generatePasswordResetToken, generateTwoFactorToken, generateVerificationToken } from "@/lib/tokens";
 import { sendPasswordResetEmail, sendTwoFactorTokenEmail, sendVerificationEmail } from "@/lib/mail";
 import { signOut } from "@/auth";
+import { currentUser } from "@/lib/currentAuth";
+import { UserRole } from "@prisma/client";
+
+export const settings = async (values: z.infer<typeof SettingsSchema>) => {
+  const user = await currentUser();
+  if (!user) return { error: "unauthorized" };
+  const dbUser = await getUserById(user.id);
+  if (!dbUser) return { error: "unauthorized" };
+  if (user.isOAuth) {
+    values.email = undefined;
+    values.password = undefined;
+    values.newPassword = undefined;
+    values.isTwoFactorEnabled = undefined;
+  }
+  if (values.email && values.email !== user.email) {
+    const existingUser = await getUserByEmail(values.email);
+    if (existingUser && existingUser.id !== user.id) return { error: "email already in use" };
+    const verificationToken = await generateVerificationToken(values.email);
+    if (verificationToken) {
+      await sendVerificationEmail(verificationToken.email, verificationToken.token);
+    }
+    return { success: "Verification email sent!" };
+  }
+  if (values.password && values.newPassword && dbUser.password) {
+    const passwordsMatch = await compare(values.password, dbUser.password);
+    if (!passwordsMatch) return { error: "Incorrect password" };
+    const hashedPassword = await hash(values.newPassword, 10);
+    values.password = hashedPassword;
+    values.newPassword = undefined;
+  }
+  await db.user.update({ where: { id: user.id }, data: { ...values } });
+  return { success: "settings updated" };
+};
 
 export const logout = async () => {
   await signOut();
@@ -93,7 +127,12 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const existingUser = await getUserByEmail(email);
   if (existingUser) return { error: "Email already in use!" };
 
-  await db.user.create({ data: { name, email, password: hashPass } });
+  if (email === process.env.AUTH_EMAIL_ADMIN) {
+    await db.user.create({ data: { name, email, role: UserRole.ADMIN, password: hashPass } });
+  } else {
+    await db.user.create({ data: { name, email, password: hashPass } });
+  }
+  // await db.user.create({ data: { name, email, password: hashPass } });
 
   const verificationToken = await generateVerificationToken(email);
   if (verificationToken) {

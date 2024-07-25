@@ -8,7 +8,7 @@ export default async function DetailAnimeId({ params: { id } }: { params: { id: 
   const anime: AnimeListData = result?.data;
 
   return (
-    <div>
+    <div className="max-w-3xl p-3 rounded-t mx-auto bg-jikan-primary">
       <h2 className="text-3xl font-bold mb-5 mt-3">{anime?.title}</h2>
       <div className="grid grid-cols-1 text-sm sm:grid-cols-4 gap-x-0 gap-y-8 sm:gap-x-3">
         <div className="col-span-1 flex flex-col gap-4">

@@ -1,5 +1,3 @@
-"use client";
-
 import { signOut } from "next-auth/react";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -10,8 +8,8 @@ export function LogoutButton() {
   };
 
   return (
-    <button type="button" onClick={onClick} className="w-full">
-      logout
-    </button>
+    <Button onClick={onClick} size="sm" variant="outline" className="w-full">
+      Logout
+    </Button>
   );
 }

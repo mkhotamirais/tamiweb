@@ -1,38 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { FaChevronUp } from "react-icons/fa6";
-import { useMmStore } from "@/hooks/useMmStore";
 import { menu } from "@/lib/menu";
 import { AuthButton } from "./auth/auth-button";
+import { useMmStore } from "@/hooks/useMmStore";
+import { MainMenuTriggerSmDown, MainMenuTriggerSmUp } from "./main-menu-trigger";
 
 export default function MainMenuClient({ user }: { user: any }) {
-  const { mm, hideMm, showMm } = useMmStore();
-  const onMouseEnter = () => {
-    if (!mm) showMm();
-  };
-
-  const onClick = () => {
-    mm ? hideMm() : showMm();
-  };
-
+  const { mm } = useMmStore();
   return (
     <div
       className={`${
         mm ? "translate-y-0 bottom-1" : "translate-y-full bottom-0"
       } bg-cyan-700/50 z-50 fixed inset-x-1 md:inset-x-24 rounded-xl transition-all`}
     >
-      <div onMouseEnter={onMouseEnter} className={`w-full fixed mx-auto -top-10 flex justify-center`}>
-        <Button
-          onClick={onClick}
-          variant={mm ? "default" : "ghost"}
-          size="icon"
-          className={`${mm ? "rotate-180" : "rotate-0"} rounded-full`}
-        >
-          <FaChevronUp className="w-3 h-3" />
-        </Button>
-      </div>
+      <MainMenuTriggerSmDown />
+      <MainMenuTriggerSmUp />
       <div className="flex flex-col">
         <nav className="bg-white border m-1 rounded-lg p-1 px-2 flex justify-between items-center">
           <Link href="/" className="text-xl font-bold">
@@ -40,6 +23,7 @@ export default function MainMenuClient({ user }: { user: any }) {
           </Link>
           <AuthButton user={user} />
         </nav>
+
         <div className="bg-white border flex-grow m-1 mt-0 rounded-lg max-h-[50vh] py-4 px-2">
           <div>
             <h3 className="text-xl font-medium mb-3">Public Api</h3>

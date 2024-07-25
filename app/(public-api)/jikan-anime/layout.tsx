@@ -1,6 +1,7 @@
 "use client";
 
 import { Header } from "@/components/jikan-anime/header";
+import { Footer } from "@/components/jikan-anime/footer";
 import React from "react";
 import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
 
@@ -15,6 +16,7 @@ export default function JikanAnimeLayout({ children }: { children: React.ReactNo
       <main onMouseEnter={onMouseEnter} className="px-3">
         {children}
       </main>
+      <Footer />
     </div>
   );
 }
