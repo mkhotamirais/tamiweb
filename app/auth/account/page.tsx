@@ -1,6 +1,5 @@
 import { currentUser } from "@/lib/currentAuth";
 import { AccountForm } from "../_components/account-form";
-import { string } from "zod";
 
 export default async function AccountPage() {
   const user = await currentUser();

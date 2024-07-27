@@ -39,6 +39,8 @@ export function AccountForm({ user }: { user: User | any }) {
     },
   });
 
+  if (!user) return <div>loading...</div>;
+
   const onSubmit = (values: z.infer<typeof UserAccountSchema>) => {
     setError("");
     setSuccess("");
