@@ -19,9 +19,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     async signIn({ user, account }) {
       const existingUser = await getUserById(user.id);
 
-      // console.log({ existingUser });
-      // console.log({ user, account });
-
       if (existingUser) {
         await db.user.update({
           where: { id: existingUser?.id },

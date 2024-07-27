@@ -3,7 +3,6 @@
 import { useMmStore } from "@/hooks/useMmStore";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
-import { AuthButton } from "./auth/auth-button";
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const { mm, hideMm } = useMmStore();

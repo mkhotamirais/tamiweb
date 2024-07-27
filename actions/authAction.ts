@@ -9,7 +9,6 @@ import {
   getTwoFactorConfirmationByUserId,
   getTwoFactorTokenByEmail,
   getUserByEmail,
-  getUserById,
   getVerificationTokenByToken,
 } from "@/data/authData";
 import { signIn } from "@/auth";
@@ -18,40 +17,7 @@ import { AuthError } from "next-auth";
 import { generatePasswordResetToken, generateTwoFactorToken, generateVerificationToken } from "@/lib/tokens";
 import { sendPasswordResetEmail, sendTwoFactorTokenEmail, sendVerificationEmail } from "@/lib/mail";
 import { signOut } from "@/auth";
-import { currentUser } from "@/lib/currentAuth";
 import { UserRole } from "@prisma/client";
-import { User } from "lucide-react";
-
-// export const settings = async (values: z.infer<typeof SettingsSchema>) => {
-//   const user = await currentUser();
-//   if (!user) return { error: "unauthorized" };
-//   const dbUser = await getUserById(user.id);
-//   if (!dbUser) return { error: "unauthorized" };
-//   if (user.isOAuth) {
-//     values.email = undefined;
-//     values.password = undefined;
-//     values.newPassword = undefined;
-//     values.isTwoFactorEnabled = undefined;
-//   }
-//   if (values.email && values.email !== user.email) {
-//     const existingUser = await getUserByEmail(values.email);
-//     if (existingUser && existingUser.id !== user.id) return { error: "email already in use" };
-//     const verificationToken = await generateVerificationToken(values.email);
-//     if (verificationToken) {
-//       await sendVerificationEmail(verificationToken.email, verificationToken.token);
-//     }
-//     return { success: "Verification email sent!" };
-//   }
-//   if (values.password && values.newPassword && dbUser.password) {
-//     const passwordsMatch = await compare(values.password, dbUser.password);
-//     if (!passwordsMatch) return { error: "Incorrect password" };
-//     const hashedPassword = await hash(values.newPassword, 10);
-//     values.password = hashedPassword;
-//     values.newPassword = undefined;
-//   }
-//   await db.user.update({ where: { id: user.id }, data: { ...values } });
-//   return { success: "settings updated" };
-// };
 
 export const logout = async () => {
   await signOut();
