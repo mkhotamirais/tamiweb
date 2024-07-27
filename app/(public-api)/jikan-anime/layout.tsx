@@ -11,9 +11,9 @@ export default function JikanAnimeLayout({ children }: { children: React.ReactNo
     if (searchBox) hideSearchBox();
   };
   return (
-    <div className={`bg-jikan-secondary text-jikan-neutral min-h-screen`}>
+    <div className={`bg-jikan-secondary text-jikan-neutral min-h-screen flex flex-col`}>
       <Header />
-      <main onMouseEnter={onMouseEnter} className="px-3">
+      <main onMouseEnter={onMouseEnter} className="px-3 flex-grow">
         {children}
       </main>
       <Footer />

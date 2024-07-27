@@ -1,6 +1,6 @@
 "use server";
 
-import { LoginSchema, NewPasswordSchema, RegisterSchema, ResetSchema, SettingsSchema } from "@/schemas/authSchema";
+import { LoginSchema, NewPasswordSchema, RegisterSchema, ResetSchema, ResetSimpleSchema } from "@/schemas/authSchema";
 import { z } from "zod";
 import { genSalt, hash, compare } from "bcryptjs";
 import { db } from "@/lib/db";
@@ -20,37 +20,38 @@ import { sendPasswordResetEmail, sendTwoFactorTokenEmail, sendVerificationEmail 
 import { signOut } from "@/auth";
 import { currentUser } from "@/lib/currentAuth";
 import { UserRole } from "@prisma/client";
+import { User } from "lucide-react";
 
-export const settings = async (values: z.infer<typeof SettingsSchema>) => {
-  const user = await currentUser();
-  if (!user) return { error: "unauthorized" };
-  const dbUser = await getUserById(user.id);
-  if (!dbUser) return { error: "unauthorized" };
-  if (user.isOAuth) {
-    values.email = undefined;
-    values.password = undefined;
-    values.newPassword = undefined;
-    values.isTwoFactorEnabled = undefined;
-  }
-  if (values.email && values.email !== user.email) {
-    const existingUser = await getUserByEmail(values.email);
-    if (existingUser && existingUser.id !== user.id) return { error: "email already in use" };
-    const verificationToken = await generateVerificationToken(values.email);
-    if (verificationToken) {
-      await sendVerificationEmail(verificationToken.email, verificationToken.token);
-    }
-    return { success: "Verification email sent!" };
-  }
-  if (values.password && values.newPassword && dbUser.password) {
-    const passwordsMatch = await compare(values.password, dbUser.password);
-    if (!passwordsMatch) return { error: "Incorrect password" };
-    const hashedPassword = await hash(values.newPassword, 10);
-    values.password = hashedPassword;
-    values.newPassword = undefined;
-  }
-  await db.user.update({ where: { id: user.id }, data: { ...values } });
-  return { success: "settings updated" };
-};
+// export const settings = async (values: z.infer<typeof SettingsSchema>) => {
+//   const user = await currentUser();
+//   if (!user) return { error: "unauthorized" };
+//   const dbUser = await getUserById(user.id);
+//   if (!dbUser) return { error: "unauthorized" };
+//   if (user.isOAuth) {
+//     values.email = undefined;
+//     values.password = undefined;
+//     values.newPassword = undefined;
+//     values.isTwoFactorEnabled = undefined;
+//   }
+//   if (values.email && values.email !== user.email) {
+//     const existingUser = await getUserByEmail(values.email);
+//     if (existingUser && existingUser.id !== user.id) return { error: "email already in use" };
+//     const verificationToken = await generateVerificationToken(values.email);
+//     if (verificationToken) {
+//       await sendVerificationEmail(verificationToken.email, verificationToken.token);
+//     }
+//     return { success: "Verification email sent!" };
+//   }
+//   if (values.password && values.newPassword && dbUser.password) {
+//     const passwordsMatch = await compare(values.password, dbUser.password);
+//     if (!passwordsMatch) return { error: "Incorrect password" };
+//     const hashedPassword = await hash(values.newPassword, 10);
+//     values.password = hashedPassword;
+//     values.newPassword = undefined;
+//   }
+//   await db.user.update({ where: { id: user.id }, data: { ...values } });
+//   return { success: "settings updated" };
+// };
 
 export const logout = async () => {
   await signOut();
@@ -63,16 +64,18 @@ export const login = async (values: z.infer<typeof LoginSchema>, callbackUrl?: s
 
   try {
     const user = await getUserByEmail(email);
-    if (!user || !user.password) return { error: "Email or password is incorrect" };
+    if (!user || !user.password) return { error: "Email is not registered" };
     const passwordMatch = await compare(password, user.password);
     if (!passwordMatch) return { error: "Email or password is incorrect" };
 
-    if (!user.emailVerified) {
-      const verificationToken = await generateVerificationToken(user?.email);
-      if (verificationToken) {
-        await sendVerificationEmail(verificationToken.email, verificationToken.token);
+    if (user.isEmailVerified) {
+      if (!user.emailVerified) {
+        const verificationToken = await generateVerificationToken(user?.email);
+        if (verificationToken) {
+          await sendVerificationEmail(verificationToken.email, verificationToken.token);
+        }
+        return { success: "confirmation email sent!" };
       }
-      return { success: "confirmation email sent!" };
     }
 
     if (user.isTwoFactorEnabled && user.email) {
@@ -134,11 +137,14 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   }
   // await db.user.create({ data: { name, email, password: hashPass } });
 
-  const verificationToken = await generateVerificationToken(email);
-  if (verificationToken) {
-    await sendVerificationEmail(verificationToken.email, verificationToken.token);
-  }
-  return { success: "Confirmation email sent!" };
+  // diaktifkan jikan ingin verifikasi email dahulu
+  // const verificationToken = await generateVerificationToken(email);
+  // if (verificationToken) {
+  //   await sendVerificationEmail(verificationToken.email, verificationToken.token);
+  // }
+  // return { success: "Confirmation email sent!" };
+
+  return { success: "Register success" };
 };
 
 export const newVerification = async (token: string) => {
@@ -186,4 +192,18 @@ export const newPassword = async (values: z.infer<typeof NewPasswordSchema>, tok
   await db.user.update({ where: { id: existingUser.id }, data: { password: hashedPassword } });
   await db.passwordResetToken.delete({ where: { id: existingToken.id } });
   return { success: "password updated" };
+};
+
+export const resetSimple = async (values: z.infer<typeof ResetSimpleSchema>) => {
+  const validatedFields = ResetSimpleSchema.safeParse(values);
+  if (!validatedFields.success) return { error: "Invalid fields" };
+
+  const { email, password } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+  if (!existingUser) return { error: "Invalid email" };
+
+  const hashPass = await hash(password, 10);
+  await db.user.update({ where: { id: existingUser.id }, data: { password: hashPass } });
+  return { success: "Reset password success" };
 };

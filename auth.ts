@@ -11,18 +11,28 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     error: "/auth/error",
   },
   events: {
-    async linkAccount({ user }) {
-      await db.user.update({ where: { id: user.id }, data: { emailVerified: new Date() } });
+    async linkAccount({ user, account }) {
+      await db.user.update({ where: { id: user.id }, data: { provider: account?.provider, lastLogin: new Date() } });
     },
   },
   callbacks: {
     async signIn({ user, account }) {
-      if (account?.provider !== "credentials") return true;
-
       const existingUser = await getUserById(user.id);
-      if (!existingUser?.emailVerified) return false;
 
-      if (existingUser.isTwoFactorEnabled) {
+      // console.log({ existingUser });
+      // console.log({ user, account });
+
+      if (existingUser) {
+        await db.user.update({
+          where: { id: existingUser?.id },
+          data: { provider: account?.provider, lastLogin: new Date() },
+        });
+      }
+
+      // if (account?.provider !== "credentials") return true;
+      // if (!existingUser?.emailVerified) return false;
+
+      if (existingUser?.isTwoFactorEnabled) {
         const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(user.id);
         if (!twoFactorConfirmation) return false;
         // delete two factor confirmation for next signin

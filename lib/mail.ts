@@ -4,10 +4,11 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const domain = process.env.NEXT_PUBLIC_APP_URL;
 
 export const sendVerificationEmail = async (email: string, token: string) => {
+  console.log(process.env.RESEND_API_KEY);
   const confirmLink = `${domain}/auth/new-verification?token=${token}`;
   await resend.emails.send({
-    from: "onboarding@resend.dev",
-    to: email,
+    from: "Acme <onboarding@resend.dev>",
+    to: [email],
     subject: "Confirm your email",
     html: `<p><a href="${confirmLink}">Click here to confirm email</a></p>`,
   });

@@ -10,7 +10,7 @@ import DeleteProductButton from "./delete-product-btn";
 
 export default function ProductListClient({ data }: { data: Product[] | null }) {
   const { errorMsg, successMsg } = useProducStore();
-  if (data?.length === 0) return <div>No data found</div>;
+  if (data?.length === 0) return <div className="flex justify-center mt-8 italic">No data found</div>;
 
   return (
     <div className="py-2">

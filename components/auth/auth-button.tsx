@@ -10,8 +10,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { LogoutButton } from "@/components/auth/logout-button";
+import type { User, UserRole } from "@prisma/client";
 
-export function AuthButton({ user }: { user: any }) {
+type UserProps =
+  | (User & {
+      role: UserRole;
+      email: string;
+      isTwoFactorEnabled: boolean;
+      isOAuth: boolean;
+    })
+  | undefined;
+
+export function AuthButton({ user }: { user: UserProps }) {
   if (!user) {
     return (
       <Button asChild size="sm">
@@ -31,11 +41,20 @@ export function AuthButton({ user }: { user: any }) {
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
           <Button asChild size="sm" variant="link">
-            <Link href="/settings" className="w-full">
+            <Link href="/auth/account" className="w-full">
               Account
             </Link>
           </Button>
         </DropdownMenuItem>
+        {user.role === "ADMIN" && (
+          <DropdownMenuItem asChild>
+            <Button asChild size="sm" variant="link">
+              <Link href="/auth/admin" className="w-full">
+                Dashboard
+              </Link>
+            </Button>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem>
           <LogoutButton />
         </DropdownMenuItem>

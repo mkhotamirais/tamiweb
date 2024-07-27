@@ -127,7 +127,8 @@ export function LoginForm() {
                 )}
               />
               <Button variant="link" size="sm" asChild className="px-0 font-normal">
-                <Link href="/auth/reset">Forgot password?</Link>
+                {/* <Link href="/auth/reset">Forgot password?</Link> */}
+                <Link href="/auth/reset-simple">Forgot password?</Link>
               </Button>
             </>
           )}
