@@ -39,8 +39,6 @@ export function AccountForm({ user }: { user: User | any }) {
     },
   });
 
-  if (!user) return <div>loading...</div>;
-
   const onSubmit = (values: z.infer<typeof UserAccountSchema>) => {
     setError("");
     setSuccess("");
@@ -92,16 +90,18 @@ export function AccountForm({ user }: { user: User | any }) {
               </FormItem>
             )}
           />
-          <Button
-            disabled={isPeding}
-            type="button"
-            variant="secondary"
-            size="sm"
-            onClick={() => setChangePassword((prev) => !prev)}
-          >
-            {changePassword ? "Hide Password Form" : "Change Password Form"}
-          </Button>
-          {changePassword && (
+          {!user?.isOAuth && (
+            <Button
+              disabled={isPeding}
+              type="button"
+              variant="secondary"
+              size="sm"
+              onClick={() => setChangePassword((prev) => !prev)}
+            >
+              {changePassword ? "Hide Password Form" : "Change Password Form"}
+            </Button>
+          )}
+          {!user?.isOAuth && changePassword && (
             <>
               <FormField
                 control={form.control}

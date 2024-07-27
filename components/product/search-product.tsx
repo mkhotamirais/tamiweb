@@ -5,7 +5,7 @@ import { useProducStore } from "@/hooks/useProduct";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
-export function SearchProduct() {
+export function SearchProduct({ user }: { user: any }) {
   const { errorMsg, successMsg, setErrorMsg, setSuccessMsg } = useProducStore();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -22,6 +22,8 @@ export function SearchProduct() {
   return (
     <div>
       <Input
+        title="Login dahulu untuk menggunakan fitur search"
+        disabled={!user}
         defaultValue={searchParams.get("q")?.toString()}
         placeholder="Search here.."
         onChange={(e) => handleChange(e.target.value)}

@@ -11,8 +11,9 @@ export default function MainMenuClient({ user }: { user: any }) {
   return (
     <div
       className={`${
-        mm ? "translate-y-0 bottom-1" : "translate-y-full bottom-0"
-      } bg-cyan-700/50 z-50 fixed inset-x-1 md:inset-x-24 rounded-xl transition-all`}
+        // mm ? "translate-y-0 bottom-1" : "translate-y-full bottom-0"
+        mm ? "translate-y-0" : "translate-y-full"
+      } bg-cyan-700/50 z-50 bottom-0 fixed inset-x-1 md:inset-x-24 rounded-xl transition-all`}
     >
       <MainMenuTriggerSmDown />
       <MainMenuTriggerSmUp />

@@ -1,5 +1,10 @@
+import { AdminGate } from "@/components/auth/route-gates";
 import { AddProductForm } from "@/components/product/add-product-form";
 
 export default function AddProductPage() {
-  return <AddProductForm />;
+  return (
+    <AdminGate>
+      <AddProductForm />;
+    </AdminGate>
+  );
 }

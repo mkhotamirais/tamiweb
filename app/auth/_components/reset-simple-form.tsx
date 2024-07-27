@@ -31,6 +31,7 @@ export function ResetSimpleForm() {
         .then((data) => {
           if (data?.success) {
             setSuccess(data.success);
+            form.reset();
           }
           if (data?.error) {
             setError(data.error);
@@ -89,7 +90,7 @@ export function ResetSimpleForm() {
             />
             <FormSuccess message={success} />
             <FormError message={error} />
-            <Button type="submit" className="w-full">
+            <Button disabled={isPending} type="submit" className="w-full">
               Reset Password
             </Button>
           </form>

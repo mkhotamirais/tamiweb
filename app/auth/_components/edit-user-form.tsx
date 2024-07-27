@@ -70,7 +70,8 @@ export function EditUserForm({ user }: { user: any }) {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  disabled={isPending || user.email === "tamiweb.01@gmail.com"}
+                  title="Email hanya bisa diedit jika bukan admin utama atau bukan email OAuth"
+                  disabled={isPending || user.email === "tamiweb.01@gmail.com" || user.provider !== "credentials"}
                   {...field}
                   placeholder="email"
                   type="email"
@@ -114,7 +115,8 @@ export function EditUserForm({ user }: { user: any }) {
               <FormDescription>Enamble two factor authentication for this account</FormDescription>
               <FormControl>
                 <Switch
-                  disabled={isPending || user.email === "tamiweb.01@gmail.com"}
+                  title="Two factor hanya bisa diedit jika bukan admin utama atau bukan email OAuth"
+                  disabled={isPending || user.email === "tamiweb.01@gmail.com" || user.provider !== "credentials"}
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />
@@ -125,7 +127,7 @@ export function EditUserForm({ user }: { user: any }) {
         />
         <FormError message={error} />
         <FormSuccess message={success} />
-        <Button disabled={isPending} type="submit">
+        <Button disabled={isPending || user.email === "tamiweb.01@gmail.com"} type="submit">
           Save Changes
         </Button>
       </form>

@@ -34,6 +34,10 @@ export default async function UserDetail({ params: { id } }: { params: { id: str
             <div className="text-gray-700">Role</div>
             <div className="text-lg font-semibold">{user?.role}</div>
           </div>
+          <div className="flex flex-col items-center">
+            <div className="text-gray-700">Provider</div>
+            <div className="text-lg font-semibold">{user?.provider}</div>
+          </div>
         </CardContent>
       </Card>
     </div>

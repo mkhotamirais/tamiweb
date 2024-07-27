@@ -1,14 +1,14 @@
 "use client";
 
 import { useProducStore } from "@/hooks/useProduct";
-import { Product } from "@prisma/client";
+import { Product, UserRole } from "@prisma/client";
 import React from "react";
 import { FormError, FormSuccess } from "../form-message";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import DeleteProductButton from "./delete-product-btn";
 
-export default function ProductListClient({ data }: { data: Product[] | null }) {
+export function ProductListClient({ data, role }: { data: Product[] | null; role: UserRole | undefined }) {
   const { errorMsg, successMsg } = useProducStore();
   if (data?.length === 0) return <div className="flex justify-center mt-8 italic">No data found</div>;
 
@@ -25,12 +25,14 @@ export default function ProductListClient({ data }: { data: Product[] | null }) 
                 <div className="capitalize text-lg font-bold">{item.name}</div>
                 <div className="">Rp{item.price}</div>
               </div>
-              <div className="flex *:w-16">
-                <Button size="sm" asChild className="rounded-none">
-                  <Link href={`/product/edit/${item.id}`}>Edit</Link>
-                </Button>
-                <DeleteProductButton id={item.id} />
-              </div>
+              {role === "ADMIN" && (
+                <div className="flex *:w-16">
+                  <Button size="sm" asChild className="rounded-none">
+                    <Link href={`/product/edit/${item.id}`}>Edit</Link>
+                  </Button>
+                  <DeleteProductButton id={item.id} />
+                </div>
+              )}
             </div>
           ))}
       </div>
