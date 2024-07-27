@@ -22,9 +22,11 @@ export function AuthSocial() {
       <Button onClick={() => onClick("google")} variant="outline" className="w-full">
         <FcGoogle className="w-4 h-4 mr-2" /> <span>Login with google</span>
       </Button>
-      <Button onClick={() => onClick("github")} variant="outline" className="w-full">
-        <FaGithub className="w-4 h-4 mr-2" /> <span>Login with github</span>
-      </Button>
+      {process.env.NODE_ENV === "development" && (
+        <Button onClick={() => onClick("github")} variant="outline" className="w-full">
+          <FaGithub className="w-4 h-4 mr-2" /> <span>Login with github</span>
+        </Button>
+      )}
     </div>
   );
 }
