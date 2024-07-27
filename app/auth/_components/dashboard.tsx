@@ -2,20 +2,21 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import type { User } from "@prisma/client";
+import type { User, UserRole } from "@prisma/client";
 import Link from "next/link";
 import React from "react";
 import { FaPenToSquare, FaEye, FaTrashCan } from "react-icons/fa6";
 
-export function Dashboard({ users }: { users: User[] | null }) {
+export function Dashboard({ users }: { users: User[] | any | null }) {
   if (!users) {
     return <div>no user registered</div>;
   }
+
   return (
     <div className="px-3 max-w-3xl mx-auto">
       <h1 className="text-2xl text-center my-4 font-bold">User List</h1>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-        {users.map((user) => (
+        {users.map((user: User) => (
           <div key={user?.id} className="rounded flex flex-col gap-4 overflow-hidden shadow">
             <div className="p-3 flex flex-col gap-2 items-center">
               <Avatar>

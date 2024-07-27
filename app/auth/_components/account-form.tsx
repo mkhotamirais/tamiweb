@@ -10,8 +10,9 @@ import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { editMe } from "@/actions/adminAction";
 import { FormError, FormSuccess } from "@/components/form-message";
+import type { User } from "@prisma/client";
 
-export function AccountForm({ user }: { user: any }) {
+export function AccountForm({ user }: { user: User | any }) {
   const [changePassword, setChangePassword] = useState(false);
   const [isPeding, startTransition] = useTransition();
   const [error, setError] = useState("");

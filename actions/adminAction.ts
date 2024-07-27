@@ -9,7 +9,9 @@ import { compare, hash } from "bcryptjs";
 
 export const getUsers = async () => {
   const userSession = await currentUser();
+  if (!userSession) return false;
   if (userSession?.role !== "ADMIN") return { error: "Unauthorized" };
+
   try {
     const data = await db.user.findMany();
     return data;
