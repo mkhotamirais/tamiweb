@@ -6,6 +6,8 @@ import { compare } from "bcryptjs";
 import { getUserByEmail } from "./data/authData";
 import { LoginSchema } from "./schemas/authSchema";
 
+const userCache = new Map();
+
 export default {
   providers: [
     GitHub({
@@ -19,14 +21,22 @@ export default {
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
-        if (validatedFields.success) {
-          const { email, password } = validatedFields.data;
-          const user = await getUserByEmail(email);
-          if (!user || !user.password) return null;
-          const passwordMatch = await compare(password, user.password);
-          if (passwordMatch) return user;
+        if (!validatedFields.success) return null;
+
+        const { email, password } = validatedFields.data;
+        let user = userCache.get(email);
+        if (!user) {
+          user = await getUserByEmail(email);
+          if (user) {
+            userCache.set(email, user);
+          }
         }
-        return null;
+        if (!user || !user.password) return null;
+
+        const passwordMatch = await compare(password, user.password);
+        if (!passwordMatch) return null;
+
+        return user;
       },
     }),
   ],

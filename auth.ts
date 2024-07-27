@@ -17,7 +17,11 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account }) {
-      const existingUser = await getUserById(user.id);
+      const [existingUser, twoFactorConfirmation] = await Promise.all([
+        getUserById(user.id),
+        getTwoFactorConfirmationByUserId(user.id),
+      ]);
+      // const existingUser = await getUserById(user.id);
 
       if (existingUser) {
         await db.user.update({
@@ -54,10 +58,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     },
     async jwt({ token }) {
       if (!token.sub) return token;
-      const existingUser = await getUserById(token.sub);
+      // const existingUser = await getUserById(token.sub);
+      // const existingAccount = await getAccountByUserId(existingUser.id);
+      const [existingUser, existingAccount] = await Promise.all([
+        getUserById(token.sub),
+        getAccountByUserId(token.sub),
+      ]);
       if (!existingUser) return token;
-
-      const existingAccount = await getAccountByUserId(existingUser.id);
 
       token.isOAuth = !!existingAccount;
       token.name = existingUser.name;
