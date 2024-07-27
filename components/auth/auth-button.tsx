@@ -22,6 +22,7 @@ type UserProps =
   | undefined;
 
 export function AuthButton({ user }: { user: UserProps }) {
+  console.log(user);
   if (!user) {
     return (
       <Button asChild size="sm">
