@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { LogoutButton } from "@/components/auth/logout-button";
 import type { User, UserRole } from "@prisma/client";
+import { useMmStore } from "@/hooks/useMmStore";
 
 type UserProps =
   | (User & {
@@ -22,6 +23,12 @@ type UserProps =
   | undefined;
 
 export function AuthButton({ user }: { user: UserProps }) {
+  const { mm, hideMm } = useMmStore();
+
+  const onClick = () => {
+    if (mm) hideMm();
+  };
+
   if (!user) {
     return (
       <Button asChild size="sm">
@@ -40,7 +47,7 @@ export function AuthButton({ user }: { user: UserProps }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
-          <Button asChild size="sm" variant="link">
+          <Button onClick={onClick} asChild size="sm" variant="link">
             <Link href="/auth/account" className="w-full">
               Account
             </Link>
@@ -48,7 +55,7 @@ export function AuthButton({ user }: { user: UserProps }) {
         </DropdownMenuItem>
         {user.role === "ADMIN" && (
           <DropdownMenuItem asChild>
-            <Button asChild size="sm" variant="link">
+            <Button onClick={onClick} asChild size="sm" variant="link">
               <Link href="/auth/admin" className="w-full">
                 Dashboard
               </Link>

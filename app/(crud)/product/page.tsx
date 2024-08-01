@@ -1,8 +1,8 @@
-import { ProductList } from "@/components/product/product-list";
-import { SearchProduct } from "@/components/product/search-product";
-import { SkeletonProduct } from "@/components/product/skeleton-product";
 import { currentUser } from "@/lib/currentAuth";
 import { Suspense } from "react";
+import { ProductList } from "./_components/product-list";
+import { SearchProduct } from "./_components/search-product";
+import { SkeletonProduct } from "./_components/skeleton-product";
 
 export default async function ProductPage({ searchParams: { q } }: { searchParams: { q: string } }) {
   const user = await currentUser();

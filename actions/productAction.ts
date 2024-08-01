@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { z } from "zod";
 import { ProductSchema } from "@/schemas/productSchema";
 import { revalidatePath } from "next/cache";
+import { put } from "@vercel/blob";
 
 export const getProducts = async (q?: string) => {
   try {
@@ -34,18 +35,21 @@ export const getProductById = async (id: string) => {
 };
 
 export const addProduct = async (values: z.infer<typeof ProductSchema>) => {
-  const validatedFields = ProductSchema.safeParse(values);
-  if (!validatedFields.success) return { error: "Invalid fields" };
-
-  const { name, price } = validatedFields.data;
-
-  const existingProduct = await getProductByName(name);
-  if (existingProduct) return { error: "Nama produk sudah terdaftar" };
-
-  await db.product.create({ data: { name, price } });
-  revalidatePath("/product");
-
-  return { success: "Produk berhasil ditambahkan" };
+  try {
+    console.log(values);
+    // const data = Object.fromEntries(formData.entries());
+    // const validatedFields = ProductSchema.safeParse(Object.fromEntries(values.entries()));
+    // if (!validatedFields.success) {
+    //   const { name, price, image } = validatedFields.error.flatten().fieldErrors;
+    //   return { name, price, image };
+    // }
+    // const { name, price, image } = validatedFields.data;
+    // const url: any = image && (await put(image.name, image, { access: "public", multipart: true }));
+    // await db.product.create({ data: { name, price, image: url } });
+    // return { message: "berhasil", data };
+  } catch (error) {
+    return { error: "failed to create contact" };
+  }
 };
 
 export const deleteProduct = async (id: string) => {

@@ -7,7 +7,10 @@ import { useMmStore } from "@/hooks/useMmStore";
 import { MainMenuTriggerSmDown, MainMenuTriggerSmUp } from "./main-menu-trigger";
 
 export default function MainMenuClient({ user }: { user: any }) {
-  const { mm } = useMmStore();
+  const { mm, hideMm } = useMmStore();
+  const onClick = () => {
+    if (mm) hideMm();
+  };
   return (
     <div
       className={`${
@@ -30,7 +33,7 @@ export default function MainMenuClient({ user }: { user: any }) {
             <h3 className="text-xl font-medium mb-3">Public Api</h3>
             <div className="flex flex-col capitalize gap-2 justify-start">
               {menu.map((item, i) => (
-                <Link key={i} href={item.href} className="text-sm hover:underline">
+                <Link onClick={onClick} key={i} href={item.href} className="text-sm hover:underline">
                   {item.label}
                 </Link>
               ))}

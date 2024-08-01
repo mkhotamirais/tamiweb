@@ -1,20 +1,30 @@
 import { FaCircleCheck, FaTriangleExclamation } from "react-icons/fa6";
 import { AuthCard } from "@/components/auth/auth-card";
 
-export function FormError({ message }: { message: string | undefined }) {
+export function FormError({ id, message }: { id?: string; message: string | undefined }) {
   if (!message) return null;
   return (
-    <div className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive">
+    <div
+      id={id}
+      aria-live="polite"
+      aria-atomic="true"
+      className="bg-destructive/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-destructive"
+    >
       <FaTriangleExclamation className="h-4 w-4" />
       <p>{message}</p>
     </div>
   );
 }
 
-export function FormSuccess({ message }: { message: string | undefined }) {
+export function FormSuccess({ id, message }: { id?: string; message: string | undefined }) {
   if (!message) return null;
   return (
-    <div className="bg-emerald-500/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-emerald-500">
+    <div
+      id={id}
+      aria-live="polite"
+      aria-atomic="true"
+      className="bg-emerald-500/15 p-3 rounded-md flex items-center gap-x-2 text-sm text-emerald-500"
+    >
       <FaCircleCheck className="h-4 w-4" />
       <p>{message}</p>
     </div>

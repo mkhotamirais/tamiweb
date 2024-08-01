@@ -86,19 +86,35 @@ model TwoFactorConfirmation {
   @@unique([userId])
 }
 
-model Contact {
-  id        String   @id @default(cuid())
-  name      String
-  phone     String
-  image     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model Product {
   id        String   @id @default(cuid())
   name      String
   price     Float
+  image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model ImgV1 {
+  id        String   @id @default(cuid())
+  name      String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ImgV2 {
+  id        String   @id @default(cuid())
+  name      String
+  image     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Teori {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

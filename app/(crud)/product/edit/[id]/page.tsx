@@ -1,6 +1,6 @@
 import { getProductById } from "@/actions/productAction";
-import { EditProductForm } from "@/components/product/edit-product-form";
 import { notFound } from "next/navigation";
+import { EditProductForm } from "../../_components/edit-product-form";
 
 export default async function EditProductPage({ params: { id } }: { params: { id: string } }) {
   const data = await getProductById(id);

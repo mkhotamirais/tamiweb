@@ -13,7 +13,7 @@ export function Dashboard({ users }: { users: User[] | any | null }) {
   }
 
   return (
-    <div className="px-3 max-w-3xl mx-auto">
+    <div className="px-3 max-w-3xl mx-auto mb-16">
       <h1 className="text-2xl text-center my-4 font-bold">User List</h1>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         {users.map((user: User) => (
