@@ -20,6 +20,9 @@ export default async function RootLayout({
   const user = await currentUser();
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={`${inter.className}`}>
         <MainMenu user={user} />
         <LayoutWrapper>{children}</LayoutWrapper>
