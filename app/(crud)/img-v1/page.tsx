@@ -4,7 +4,7 @@ import { ImageItems } from "./_components/image-items";
 import { Suspense } from "react";
 import { LoaderPulse } from "@/components/loader-pulse";
 
-export default async function UploadImagePage() {
+export default async function ImgV1Page() {
   return (
     <>
       <div className="my-2 flex justify-between">

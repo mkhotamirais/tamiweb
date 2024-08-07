@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-export default function UploadImageLayout({ children }: { children: React.ReactNode }) {
+export default function ImgV1Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="bg-gray-50 min-h-screen">
       <header className="z-50 max-w-2xl sticky top-0 mx-auto bg-slate-100 h-16 flex items-center justify-between px-3">

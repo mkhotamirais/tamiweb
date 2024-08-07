@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { LogoutButton } from "@/components/auth/logout-button";
 import type { User, UserRole } from "@prisma/client";
-import { useMmStore } from "@/hooks/useMmStore";
+import { useMm } from "@/hooks/useMm";
 
 type UserProps =
   | (User & {
@@ -22,16 +22,15 @@ type UserProps =
     })
   | undefined;
 
-export function AuthButton({ user }: { user: UserProps }) {
-  const { mm, hideMm } = useMmStore();
-
+export function AuthButton({ user, className }: { user: UserProps; className?: string }) {
+  const { mm, closeMm, openMm } = useMm();
   const onClick = () => {
-    if (mm) hideMm();
+    mm ? closeMm() : openMm();
   };
 
   if (!user) {
     return (
-      <Button asChild size="sm">
+      <Button asChild size="sm" className={className}>
         <Link href="/auth/login">Login</Link>
       </Button>
     );
@@ -40,9 +39,9 @@ export function AuthButton({ user }: { user: UserProps }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
+        <Avatar className="size-8">
           <AvatarImage src={user?.image || ""} />
-          <AvatarFallback className="bg-sky-500">{user.email.substring(0, 2)}</AvatarFallback>
+          <AvatarFallback className="bg-sky-500 text-white size-8">{user.email.substring(0, 2)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
