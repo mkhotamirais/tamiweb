@@ -1,9 +1,9 @@
 "use client";
 
-import { Header } from "@/components/jikan-anime/header";
-import { Footer } from "@/components/jikan-anime/footer";
 import React from "react";
 import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
+import { Header } from "./_components/header";
+import { Footer } from "./_components/footer";
 
 export default function JikanAnimeLayout({ children }: { children: React.ReactNode }) {
   const { searchBox, hideSearchBox } = useJikanAnimeStore();

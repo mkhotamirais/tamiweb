@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
-import { AnimeList } from "@/lib/jikan-anime-types";
 
 export const Pagination = ({ lastPage, total }: { lastPage: number; total: number }) => {
   const { page, setPage } = useJikanAnimeStore();

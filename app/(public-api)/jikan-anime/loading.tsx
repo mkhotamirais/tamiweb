@@ -1,5 +1,5 @@
-import { LoaderPulse } from "@/components/jikan-anime/loader-pulse";
+import { LoaderJikan } from "./_components/loader-jikan";
 
 export default function LoadingJikanAnime() {
-  return <LoaderPulse />;
+  return <LoaderJikan />;
 }

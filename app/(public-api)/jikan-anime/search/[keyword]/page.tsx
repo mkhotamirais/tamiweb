@@ -1,12 +1,12 @@
 "use client";
 
 import { fetchData } from "@/actions/jikan-anime";
-import { DataList } from "@/components/jikan-anime/data-list";
-import { DataTitle } from "@/components/jikan-anime/data-title";
 import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
 import React, { useEffect } from "react";
-import { LoaderPulse } from "@/components/jikan-anime/loader-pulse";
-import { Pagination } from "@/components/jikan-anime/pagination";
+import { DataTitle } from "../../_components/data-title";
+import { Pagination } from "../../_components/pagination";
+import { DataList } from "../../_components/data-list";
+import { LoaderJikan } from "../../_components/loader-jikan";
 
 export default function SearchKeyword({ params }: { params: { keyword: string } }) {
   const { page, searchResult, setSearchResult } = useJikanAnimeStore();
@@ -33,7 +33,7 @@ export default function SearchKeyword({ params }: { params: { keyword: string } 
           <Pagination total={Number(total)} lastPage={Number(last_visible_page)} />
         </>
       ) : (
-        <LoaderPulse />
+        <LoaderJikan />
       )}
     </div>
   );

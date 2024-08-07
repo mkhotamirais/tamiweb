@@ -52,7 +52,7 @@ export function MainMenuLinks({ user }: { user: any }) {
     <Command>
       <div className="flex items-center justify-between p-3 gap-3 shadow">
         <Link href="/" onClick={closeMm} className="flex items-center gap-2">
-          <House className="size-5" /> <div className="font-bold hidden sm:block">Tamivite</div>
+          <House className="size-5" /> <div className="font-bold hidden sm:block">Tamiweb</div>
         </Link>
         <div className="flex gap-3">
           <CommandInput className="w-28" placeholder="Search menu.." />

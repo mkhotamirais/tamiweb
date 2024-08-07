@@ -1,7 +1,7 @@
 import { fetchData, fetchRecommendedData } from "@/actions/jikan-anime";
-import { DataList } from "@/components/jikan-anime/data-list";
-import { DataTitle } from "@/components/jikan-anime/data-title";
 import { AnimeList } from "@/lib/jikan-anime-types";
+import { DataTitle } from "./_components/data-title";
+import { DataList } from "./_components/data-list";
 
 export default async function Home() {
   let topAnime: AnimeList = await fetchData("top/anime", "limit=8");

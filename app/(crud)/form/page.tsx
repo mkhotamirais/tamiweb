@@ -5,7 +5,7 @@ import { Form4Page } from "./_components/form4";
 
 export default function FormPage() {
   return (
-    <div className="pb-24">
+    <div className="">
       <Form1Page />
       <Form2Page />
       <Form3Page />

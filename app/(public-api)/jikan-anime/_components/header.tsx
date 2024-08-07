@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Search } from "@/components/jikan-anime/search";
 import { SearchTrigger } from "./search-trigger";
+import { Search } from "./search";
 
 export const Header = () => {
   return (
