@@ -14,7 +14,7 @@ export function MeButtons() {
   };
   return (
     <div
-      className={`fixed flex gap-2 top-0 right-0 mt-3 pr-3 sm:pr-8 ${
+      className={`fixed flex gap-2 top-0 right-0 py-3 pr-3 sm:pr-8 ${
         me ? "translate-x-0" : "translate-x-full"
       } transition`}
     >

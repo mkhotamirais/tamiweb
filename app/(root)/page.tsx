@@ -14,7 +14,6 @@ export default async function Home() {
 
   return (
     <div className="px-3 flex flex-col gap-5 items-center justify-center min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-100 to-cyan-500">
-      <MeButtons />
       <div className="text-center mb-6">
         <h1 className={cn("text-4xl text-center font-bold mb-5 drop-shadow-md", font.className)}>
           Welcome <span className="capitalize">{user?.name}</span>

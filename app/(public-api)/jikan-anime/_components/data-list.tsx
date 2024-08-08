@@ -1,6 +1,6 @@
-import { AnimeList } from "@/lib/jikan-anime-types";
 import Image from "next/image";
 import Link from "next/link";
+import { AnimeList } from "./jikan-anime-types";
 
 export const DataList = ({ data }: { data: AnimeList["data"] }) => {
   return (

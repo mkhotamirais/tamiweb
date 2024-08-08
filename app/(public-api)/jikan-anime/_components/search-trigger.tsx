@@ -1,10 +1,10 @@
 "use client";
 
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
+import { useJikan } from "./use-jikan";
 
 export const SearchTrigger = () => {
-  const { searchBox, showSearchBox, hideSearchBox } = useJikanAnimeStore();
+  const { searchBox, showSearchBox, hideSearchBox } = useJikan();
   const onClick = () => {
     searchBox ? hideSearchBox() : showSearchBox();
   };

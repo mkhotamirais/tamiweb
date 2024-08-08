@@ -3,10 +3,10 @@
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import React, { useRef, useEffect } from "react";
-import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
+import { useJikan } from "./use-jikan";
 
 export const Search = () => {
-  const { setPage, keyword, setKeyword, searchBox, hideSearchBox } = useJikanAnimeStore();
+  const { setPage, keyword, setKeyword, searchBox, hideSearchBox } = useJikan();
   const searchRef = useRef<HTMLInputElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 

@@ -7,9 +7,10 @@ import { Toaster as ToasterSonner } from "@/components/ui/sonner";
 import { useMm } from "@/hooks/useMm";
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
-  const { mm, closeMm } = useMm();
+  const { mm, me, closeMm, closeMe } = useMm();
   const onMouseEnter = () => {
-    if (mm) closeMm();
+    if (mm) closeMe();
+    if (me) closeMe();
   };
 
   return (

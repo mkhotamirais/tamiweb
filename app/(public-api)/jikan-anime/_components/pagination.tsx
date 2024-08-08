@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
+import { useJikan } from "./use-jikan";
 
 export const Pagination = ({ lastPage, total }: { lastPage: number; total: number }) => {
-  const { page, setPage } = useJikanAnimeStore();
+  const { page, setPage } = useJikan();
   const [editPage, setEditPage] = useState(false);
   const [newPage, setNewPage] = useState(page);
   const inputPageRef = useRef<HTMLInputElement | null>(null);

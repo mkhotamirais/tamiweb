@@ -1,7 +1,14 @@
 import Image from "next/image";
 import { fetchData } from "@/actions/jikan-anime";
-import { AnimeListData } from "@/lib/jikan-anime-types";
 import { TrailerYoutube } from "../../_components/trailer-youtube";
+import { AnimeListData } from "../../_components/jikan-anime-types";
+import { Metadata } from "next";
+
+export const generateMetadata = ({ params: { id } }: { params: { id: string } }): Metadata => {
+  return {
+    title: `Detail ${id}`,
+  };
+};
 
 export default async function DetailAnimeId({ params: { id } }: { params: { id: string } }) {
   const result = await fetchData(`anime/${id}`);

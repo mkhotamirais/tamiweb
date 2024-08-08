@@ -1,14 +1,14 @@
 "use client";
 
 import { fetchData } from "@/actions/jikan-anime";
-import { useJikanAnimeStore } from "@/hooks/useJikanAnimeStore";
 import { useEffect } from "react";
 import { Pagination } from "../_components/pagination";
 import { DataList } from "../_components/data-list";
 import { LoaderJikan } from "../_components/loader-jikan";
+import { useJikan } from "../_components/use-jikan";
 
 export default function TopAnimeServer() {
-  const { page, setPage, topAnime, setTopAnime } = useJikanAnimeStore();
+  const { page, setPage, topAnime, setTopAnime } = useJikan();
 
   const total = topAnime?.pagination?.items?.total;
   const last_visible_page = topAnime?.pagination?.last_visible_page;

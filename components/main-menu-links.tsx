@@ -1,8 +1,6 @@
 "use client";
 
-import { AppWindow, Code, Component, Database, Edit, Home, House, Image, Presentation } from "lucide-react";
-import { TbBrandFramerMotion } from "react-icons/tb";
-import { SiHtml5, SiReact, SiShadcnui } from "react-icons/si";
+import { Component, Edit, Globe, Home, House } from "lucide-react";
 import { TbApi } from "react-icons/tb";
 import {
   Command,
@@ -22,27 +20,47 @@ const menu = [
     heading: "Home",
     icon: Home,
     links: [
-      { href: "/projects", label: "Projects" },
-      { href: "/portofolio-legacy", label: "Portofolio Legacy" },
+      { href: "/home-menu", label: "Home" },
+      { href: "/portfolio", label: "Portfolio" },
+      { href: "/layout-vs-template", label: "Layout vs Template" },
     ],
   },
   {
     heading: "Components",
     icon: Component,
-    links: [{ href: "/form", label: "Form" }],
+    links: [
+      { href: "/components-menu", label: "Components" },
+      { href: "/form", label: "Form" },
+    ],
   },
   {
     heading: "Crud",
     icon: Edit,
     links: [
-      { href: "/img-v1", label: "Image V1" },
-      { href: "/teori", label: "teori" },
+      { href: "/crud-menu", label: "Crud" },
+      { href: "/vercel-text", label: "Vercel text" },
+      { href: "/vercel-img1", label: "Vercel image1" },
+      { href: "/vercel-img2", label: "Vercel image2" },
+      { href: "/appwrite", label: "Appwrite" },
     ],
   },
   {
     heading: "Public Api",
     icon: TbApi,
-    links: [{ href: "/jikan-anime", label: "Jikan Anime" }],
+    links: [
+      { href: "/public-api-menu", label: "Public Api" },
+      { href: "/jikan-anime", label: "Jikan Anime" },
+      { href: "/dummyjson", label: "Dummyjson" },
+      { href: "/tmdb", label: "Tmdb" },
+    ],
+  },
+  {
+    heading: "Web Design",
+    icon: Globe,
+    links: [
+      { href: "/web-design-menu", label: "Web Design" },
+      // { href: "/jikan-anime", label: "Jikan Anime" },
+    ],
   },
 ];
 

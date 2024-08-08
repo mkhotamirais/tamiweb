@@ -1,4 +1,4 @@
-import { AnimeList, AnimeListDataEntry, RecommendationList } from "@/lib/jikan-anime-types";
+import { AnimeListDataEntry, RecommendationList } from "@/app/(public-api)/jikan-anime/_components/jikan-anime-types";
 
 export async function fetchData(resource?: string, query?: string) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_JIKAN_ANIME}/${resource}?${query}`);
