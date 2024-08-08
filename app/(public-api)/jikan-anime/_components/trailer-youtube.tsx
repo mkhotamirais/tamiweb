@@ -1,7 +1,7 @@
 "use client";
 
-import { AnimeListData } from "@/lib/jikan-anime-types";
 import Youtube from "react-youtube";
+import { AnimeListData } from "./jikan-anime-types";
 
 export const TrailerYoutube = ({ data }: { data: AnimeListData["trailer"] }) => {
   return (
