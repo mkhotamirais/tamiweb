@@ -111,7 +111,7 @@ model ImgV2 {
   updatedAt DateTime @updatedAt
 }
 
-model Teori {
+model Text {
   id          String   @id @default(cuid())
   title       String
   description String

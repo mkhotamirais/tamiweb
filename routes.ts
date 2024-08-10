@@ -3,7 +3,15 @@
  * These routes do not require authentication
  * @type {string[]}
  * */
-export const publicRoutes = ["/", "/auth/new-verification", "/jikan-anime", "/product"];
+export const publicRoutes = [
+  "/",
+  "/auth/new-verification",
+  "/jikan-anime",
+  "/product",
+  // "/appwrite-text",
+  // "/appwrite-text/**/*",
+  // /^\/appwrite-text(\/.*)?$/,
+];
 
 /**
  * An array of routes that are used for authentication

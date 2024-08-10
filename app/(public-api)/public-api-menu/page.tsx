@@ -2,7 +2,8 @@ import { TitlePage } from "@/components/wrapper";
 
 const menu = [
   { href: "/jikan-anime", label: "Jikan Anime" },
-  { href: "/teori", label: "" },
+  { href: "/dummyjson", label: "Dummyjson" },
+  { href: "/tmdb", label: "Tmdb" },
 ];
 
 export default function CrudMenuPage() {

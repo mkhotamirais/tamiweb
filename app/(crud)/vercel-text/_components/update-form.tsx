@@ -5,32 +5,34 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
+import { TextSchema } from "./schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "@/components/ui/textarea";
 import { useTransition } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { postText } from "@/actions/vercel-text";
-import { TextSchema } from "../_components/schemas";
+import { Text } from "@prisma/client";
+import { updateText } from "@/actions/vercel-text";
 
 type formValue = z.infer<typeof TextSchema>;
 
-export default function PostTextPage() {
+export function UpdateForm({ text }: { text: Text | null }) {
   const [pending, startTransition] = useTransition();
   const form = useForm<formValue>({
     resolver: zodResolver(TextSchema),
-    defaultValues: { title: "", description: "" },
+    defaultValues: { title: text?.title || "", description: text?.description || "" },
   });
 
   const router = useRouter();
 
   const onSubmit = (values: formValue) => {
     startTransition(() => {
-      postText(values)
+      updateText(text?.id, values)
         .then((res) => {
+          form.reset();
           if (res?.success) {
-            form.reset();
-            router.push("/vercel-text");
+            form.reset(values);
+            router.push(`/vercel-text`);
             router.refresh();
             toast.success(res.success);
           }
@@ -43,7 +45,6 @@ export default function PostTextPage() {
   };
   return (
     <div>
-      <h2 className="text-xl font-bold">Post Text</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -73,8 +74,8 @@ export default function PostTextPage() {
             )}
           />
           <Button disabled={pending} type="submit" className="w-32">
-            {pending ? "Processing.." : "Submit"}
-          </Button>
+            {pending ? "Processing.." : "Save"}
+          </Button>{" "}
         </form>
       </Form>
     </div>

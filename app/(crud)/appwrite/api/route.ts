@@ -15,7 +15,6 @@ async function createPost(data: { title: string; description: string }) {
     );
     return response;
   } catch (error) {
-    console.error("Error creating crud-post", error);
     throw new Error("Failed to create crud-post");
   }
 }

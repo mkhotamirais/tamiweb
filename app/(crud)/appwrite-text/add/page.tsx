@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function AddCrud1() {
-  const [formData, setFormData] = useState({ title: "", description: "" });
+export default function AddPage() {
+  const [formData, setFormData] = useState({ name: "", description: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,17 +19,17 @@ export default function AddCrud1() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title || !formData.description) {
+    if (!formData.name || !formData.description) {
       setError("isi dulu");
       return;
     }
     setError(null);
     setIsLoading(true);
     await axios
-      .post("/app/appwrite/api", formData)
+      .post("/appwrite-text/api", formData)
       .then((res) => {
         console.log(res);
-        router.push("/fullstack/crud1");
+        router.push("/appwrite-text");
       })
       .catch((err) => {
         console.log(err);
@@ -46,10 +46,10 @@ export default function AddCrud1() {
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <input
           type="text"
-          name="title"
-          id="title"
+          name="name"
+          id="name"
           className="w-full border p-2"
-          placeholder="title"
+          placeholder="name"
           onChange={handleChange}
         />
         <textarea

@@ -39,6 +39,7 @@ export default auth((req) => {
 export const config = {
   // matcher from clerk
   matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
+  // matcher: ["/"],
   // matcher default
   // matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

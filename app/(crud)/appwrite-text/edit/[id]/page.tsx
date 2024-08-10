@@ -1,15 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function AddCrud1() {
-  const [formData, setFormData] = useState({ title: "", description: "" });
+export default function Edit({ params }: { params: { id: string } }) {
+  const [formData, setFormData] = useState({ name: "", description: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     setFormData((prev) => {
@@ -17,44 +15,57 @@ export default function AddCrud1() {
     });
   };
 
+  const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.title || !formData.description) {
+    if (!formData.name || !formData.description) {
       setError("isi dulu");
       return;
     }
     setError(null);
     setIsLoading(true);
-    await axios
-      .post("/app/appwrite/api", formData)
-      .then((res) => {
-        console.log(res);
-        router.push("/fullstack/crud1");
-      })
-      .catch((err) => {
-        console.log(err);
-        throw new Error("gagal");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    try {
+      const res = await axios.patch(`/appwrite-text/api/${params.id}`, formData);
+      router.push("/appwrite-text");
+    } catch (error) {
+      setError("ada kesalahan");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/appwrite-text/api/${params.id}`);
+        const { name, description } = response.data.response;
+        setFormData({ name, description });
+      } catch (error) {
+        setError("failed to load post");
+      }
+    };
+    fetchData();
+  }, [params]);
+
   return (
     <div>
-      <h1 className="text-3xl font-semibold mb-3">Add Data</h1>
+      <h1 className="text-3xl font-semibold mb-3">Edit Data</h1>
       {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <input
           type="text"
-          name="title"
-          id="title"
+          id="name"
+          name="name"
+          value={formData?.name}
           className="w-full border p-2"
-          placeholder="title"
+          placeholder="name"
           onChange={handleChange}
         />
         <textarea
-          name="description"
           id="description"
+          name="description"
+          value={formData?.description}
           placeholder="description"
           onChange={handleChange}
           className="p-2 w-full h-64 border"
@@ -65,7 +76,7 @@ export default function AddCrud1() {
           disabled={isLoading}
           className="border rounded p-2 hover:bg-black hover:text-white transition-all disabled:opacity-50"
         >
-          {isLoading ? "loading..." : "add"}
+          {isLoading ? "loading..." : "update"}
         </button>
       </form>
     </div>

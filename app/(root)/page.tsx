@@ -1,7 +1,6 @@
 import { Merriweather } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { currentUser } from "@/lib/currentAuth";
-import { MeButtons } from "./_components/me-buttons";
 import { WelcomeButtons } from "./_components/welcome-buttons";
 
 const font = Merriweather({

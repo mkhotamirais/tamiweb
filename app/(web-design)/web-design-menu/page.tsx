@@ -1,8 +1,8 @@
 import { TitlePage } from "@/components/wrapper";
 
 const menu = [
-  { href: "/school", label: "School" },
-  { href: "/layout-vs-template", label: "Layout vs Template" },
+  { href: "/web-design-menu", label: "Web Design" },
+  // { href: "", label: "" },
 ];
 
 export default function HomeMenuPage() {
