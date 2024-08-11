@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
 .overflow-y-scroll::-webkit-scrollbar {
   @apply hidden;
 }

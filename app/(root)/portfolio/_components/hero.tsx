@@ -2,24 +2,33 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { FaEnvelope, FaLinkedin, FaSquareGithub } from "react-icons/fa6";
+import { FaEnvelope, FaHouse } from "react-icons/fa6";
 import { FaFileDownload } from "react-icons/fa";
 import useSectionView from "./useSectionView";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useMm } from "@/hooks/useMm";
 
 export default function Hero() {
+  const { me, closeMe, openMe } = useMm();
+
   const { ref } = useSectionView("home");
   const { scrollY } = useScroll();
 
   const yImage = useTransform(scrollY, [0, 500], [0, 150]);
   const scaleH1 = useTransform(scrollY, [0, 500], [1, 0]);
-  const scaleXButtons = useTransform(scrollY, [0, 500], [1, 0]);
-  const opacityButtons = useTransform(scrollY, [0, 500], [1, 0]);
-  const yButtons = useTransform(scrollY, [0, 500], [0, -150]);
+
+  const onClick = () => {
+    !me ? openMe() : closeMe();
+  };
 
   return (
-    <section id="home" ref={ref} className="min-h-screen flex items-center justify-center px-3">
-      <div className="max-w-xl w-full flex flex-col items-center mb-8 gap-4 sm:gap-8">
+    <section
+      id="home"
+      ref={ref}
+      className="min-h-screen flex items-center justify-center px-3 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-100 to-cyan-500"
+    >
+      <div className="max-w-xl w-full flex flex-col items-center gap-4 sm:gap-8">
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -36,73 +45,35 @@ export default function Hero() {
             priority={true}
           />
         </motion.div>
-        <motion.h1
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          style={{ scale: scaleH1 }}
-          className="text-2xl font-raleway leading-relaxed text-center sm:text-3xl max-w-lg md:max-w-xl mx-auto"
-        >
-          My name is <b>Khotami</b>, I am a <b>Fullstack Developer</b> with <b>2 years</b> of experience. Specializing
-          in <u>React and Next.js</u>. I enjoy building <i>sites and apps</i>.
-        </motion.h1>{" "}
-        <motion.div
-          style={{ scaleX: scaleXButtons, opacity: opacityButtons, y: yButtons }}
-          className="flex gap-2 flex-col sm:flex-row items-center"
-        >
-          <Link href="#contact">
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1, transition: { delay: 0.3 } }}
-              type="button"
-              className="group bg-gray-800 text-white px-6 h-10 sm:h-12 rounded-full"
-              aria-label="contact me"
-            >
-              <div className="group-hover:scale-110 flex items-center gap-2 transition">
-                Contact Me
-                <FaEnvelope />
-              </div>
-            </motion.button>
-          </Link>
-          <a title="cv mkhotami" href="/portofolio-saya/CV-KHOTAMI-RAIS.pdf">
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1, transition: { delay: 0.5 } }}
-              type="button"
-              className="group bg-white text-gray-900 border px-6 h-10 sm:h-12 rounded-full"
-              aria-label="contact me"
-            >
-              <div className="group-hover:scale-110 focus:scale-90 flex items-center gap-2 transition">
+        <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} style={{ scale: scaleH1 }}>
+          <h1 className="text-xl font-raleway leading-loose text-center sm:text-2xl max-w-lg md:max-w-xl mx-auto">
+            I&apos;m <b>Mkhotami</b>, a <b>web developer</b> with expertise in <b>MERN</b> and <b>NextJs</b>. I build
+            dynamic, <b>responsive web applications</b> and create seamless user experiences with efficient code.
+          </h1>
+          <div className="flex gap-2 flex-col sm:flex-row items-center justify-center mt-6">
+            <a title="cv mkhotami" href="/portofolio-saya/CV-KHOTAMI-RAIS.pdf">
+              <Button type="button" aria-label="contact me" className="rounded-full">
                 Download CV
-                <FaFileDownload />
-              </div>
-            </motion.button>
-          </a>
-          <a title="linkedin mkhotami" href="https://www.linkedin.com/in/mkhotami-rais/">
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1, transition: { delay: 0.7 } }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.05 }}
+                <FaFileDownload className="ml-2" />
+              </Button>
+            </a>
+            <Button
+              title="contact me"
+              asChild
+              variant={"outline"}
+              size={"icon"}
               type="button"
-              className="group bg-white text-gray-900 border size-10 sm:size-12 rounded-full flex items-center justify-center"
               aria-label="contact me"
+              className="rounded-full"
             >
-              <FaLinkedin className="group-hover:scale-110 transition" />
-            </motion.button>
-          </a>
-          <a title="github mkhotami" href="https://github.com/mkhotamirais">
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1, transition: { delay: 0.9 } }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.05 }}
-              type="button"
-              className="group bg-white text-gray-900 border size-10 sm:size-12 rounded-full flex items-center justify-center"
-              aria-label="contact me"
-            >
-              <FaSquareGithub className="group-hover:scale-110 transition" />
-            </motion.button>
-          </a>
+              <Link href="#contact">
+                <FaEnvelope />
+              </Link>
+            </Button>
+            <Button onClick={onClick} title="my homepage" variant={"secondary"} size="icon" className="rounded-full">
+              <FaHouse />
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>

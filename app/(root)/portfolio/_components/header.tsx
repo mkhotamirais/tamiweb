@@ -11,7 +11,7 @@ export default function Header({ className }: { className?: string }) {
     <motion.header
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className={`${className} h-16 z-50 fixed top-0 w-full`}
+      className={`${className} h-16 z-40 fixed top-0 w-full`}
     >
       <BubbleNav className="block sm:hidden" />
       <FloatNav className="hidden sm:flex" />

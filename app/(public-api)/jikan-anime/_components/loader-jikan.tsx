@@ -1,3 +1,5 @@
+"use client";
+
 import { PulseLoader } from "react-spinners";
 
 export const LoaderJikan = () => {

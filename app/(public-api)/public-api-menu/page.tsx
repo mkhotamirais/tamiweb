@@ -7,5 +7,5 @@ const menu = [
 ];
 
 export default function CrudMenuPage() {
-  return <TitlePage title="Crud" menu={menu} />;
+  return <TitlePage title="Public Api" menu={menu} />;
 }

@@ -60,7 +60,7 @@ const menu = [
     icon: Globe,
     links: [
       { href: "/web-design-menu", label: "Web Design" },
-      // { href: "", label: "" },
+      { href: "/school", label: "School" },
     ],
   },
 ];

@@ -24,8 +24,8 @@ export default function PortofolioSaya() {
       <main onClick={handleClick} className="flex-grow">
         <Hero />
         <About />
-        <Skill />
         <Project />
+        <Skill />
         <Experience />
         <Contact />
       </main>
