@@ -1,10 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { menu } from "./menu";
 import { FaBars, FaXmark } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { usePortfolio } from "./usePortfolio";
+
+const menu = [
+  { hash: "#home", label: "home" },
+  { hash: "#about", label: "about" },
+  { hash: "#project", label: "project" },
+  { hash: "#skill", label: "skill" },
+  { hash: "#experience", label: "experience" },
+  { hash: "#contact", label: "contact" },
+] as const;
 
 export default function Header({ className }: { className?: string }) {
   return (

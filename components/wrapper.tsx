@@ -10,6 +10,10 @@ export default function Container({ children, className = "bg-white" }: Containe
   return <div className={`${className} max-w-2xl mx-auto min-h-screen`}>{children}</div>;
 }
 
+export function Title({ children }: { children: React.ReactNode }) {
+  return <h1 className="text-3xl font-semibold text-center py-8">{children}</h1>;
+}
+
 export function TitlePage({ title, menu = [] }: { title: string; menu: { href: string; label: string }[] }) {
   return (
     <div className="bg-gray-50">

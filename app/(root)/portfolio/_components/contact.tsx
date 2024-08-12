@@ -3,9 +3,9 @@
 import useSectionView from "./useSectionView";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import { Title } from "./components";
 import EmailSendBtn from "./email-send-btn";
 import { emailAction } from "./email-action";
+import { Title } from "@/components/wrapper";
 
 export default function Contact() {
   const { ref } = useSectionView("contact");
@@ -17,7 +17,7 @@ export default function Contact() {
       transition={{ duration: 1 }}
       id="contact"
       ref={ref}
-      className="scroll-mt-16 sm:scroll-mt-24 w-[min(100%,38rem)] mx-auto px-3 mb-24"
+      className="scroll-mt-16 sm:scroll-mt-24 w-[min(100%,38rem)] mx-auto px-3 py-8"
     >
       <Title>Contact Me</Title>
       <p className="text-center -mt-3">

@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import React from "react";
-import { Title } from "./components";
 import useSectionView from "./useSectionView";
+import { Title } from "@/components/wrapper";
 
 export default function About() {
   const { ref } = useSectionView("about");
@@ -16,9 +16,9 @@ export default function About() {
       animate={{ y: 0 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.1 }}
-      className="text-center scroll-mt-16 sm:scroll-mt-28 px-3 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-100 to-cyan-500"
+      className="text-center scroll-mt-16 sm:scroll-mt-24 px-3 py-8"
     >
-      <div className="max-w-2xl mx-auto leading-7 pb-24 sm:pb-32">
+      <div className="max-w-2xl mx-auto leading-7">
         <Title>About Me</Title>
         <p className="mb-3 leading-8">
           Graduated from UIN Jakarta in 2022 with a major in Arabic Language and Literature. Developed an interest in{" "}

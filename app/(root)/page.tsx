@@ -19,9 +19,9 @@ export default async function Home() {
           <h1 className={cn("text-4xl text-center font-bold mb-5 drop-shadow-md", font.className)}>
             Welcome <span className="capitalize">{user?.name}</span>
           </h1>
-          <p className="text-xl font-medium text-muted-foreground">
-            I am <span className="text-black">Khotemi</span>, I am a web developer, my focus is{" "}
-            <span className="text-black">mern / nextjs</span>
+          <p className="text-xl font-raleway text-center max-w-lg md:max-w-xl mx-auto">
+            I&apos;m <b>Mkhotami</b>, a <b>web developer</b> with expertise in <b>MERN</b> and <b>NextJs</b>. I build
+            dynamic, <b>responsive web applications</b> and create seamless user experiences with efficient code.
           </p>
         </div>
         <WelcomeButtons />

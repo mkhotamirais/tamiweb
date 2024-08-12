@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Title } from "@/components/wrapper";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MouseEvent, useState } from "react";
@@ -111,7 +112,11 @@ const projectsMenu = [
 
 const badges = [...new Set(projectsMenu.flatMap((project) => project.tools))];
 
-export function Projects() {
+export function Projects({
+  className = "bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-100 to-cyan-500",
+}: {
+  className?: string;
+}) {
   const pathname = usePathname();
   const [cari, setCari] = useState("");
   const [selectedBadge, setSelectedBadge] = useState<string[]>([]);
@@ -134,8 +139,8 @@ export function Projects() {
   };
 
   return (
-    <div className="px-3 py-8 sm:px-12 lg:px-32 min-h-screen bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-100 to-cyan-500">
-      <h1 className="text-3xl font-bold text-center pb-6">My Projects</h1>
+    <div className={`${className} px-3 sm:px-12 lg:px-32 min-h-screen`}>
+      <Title>My Projects</Title>
       {pathname === "/projects" && (
         <Input
           value={cari}
