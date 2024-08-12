@@ -46,9 +46,9 @@ export default function Footer() {
             <ul className="text-sm flex flex-col gap-2">
               {menu.map((item, index) => (
                 <li key={index}>
-                  <a href="/about-us" className="text-blue-300 capitalize hover:text-white transition-all">
+                  <Link href={item.href} className="text-blue-300 capitalize hover:text-white transition-all">
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="mt-8 text-center py-4">
           <small>
             &copy; {new Date().getFullYear()}{" "}
-            <Link href="" className="text-blue-400 font-semibold hover:underline">
+            <Link href="/school" className="text-blue-400 font-semibold hover:underline">
               Bluefield High School
             </Link>
             . All Rights Reserved.

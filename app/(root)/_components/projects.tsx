@@ -87,7 +87,7 @@ const projectsMenu = [
   },
   {
     title: "Nurul Iman",
-    hrefEx: "http://tamivite.vercell.app/static-web/nuruliman/index.html",
+    hrefEx: "http://tamivite.vercel.app/static-web/nuruliman/index.html",
     isPrimary: false,
     description:
       "This is a website for a school named Nurul Iman, which is still under development. It provides general information about the school.",
@@ -95,7 +95,7 @@ const projectsMenu = [
   },
   {
     title: "Symbol Color",
-    href: "http://tamivite.vercell.app/symbol-color",
+    href: "http://tamivite.vercel.app/symbol-color",
     isPrimary: false,
     description:
       "This project provides information on 44 different colors, including their names, HEX codes, RGB values, characteristics, psychological effects, and usage. Users can select their desired color to view detailed descriptions and utilize a search feature to find specific colors easily.",
@@ -163,7 +163,7 @@ export function Projects({
           ))}
         </div>
       )}
-      <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
+      <div className="pb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
         {filteredProjectsMenu.map((item, i) => (
           <Card key={i} className="group relative bg-cyan-100 flex flex-col overflow-hidden">
             <div className="translate-y-full group-hover:translate-y-0 transition absolute inset-0 top-3/4 z-10 flex items-center justify-center bg-black/20">

@@ -43,7 +43,7 @@ export default function Header() {
         <div
           className={`${
             nav ? "scale-x-100" : "scale-x-0"
-          } origin-right lg:scale-x-100 fixed top-0 bottom-0 right-0 w-2/3 lg:w-auto p-3 lg:p-0 bg-blue-500/50 backdrop-blur border-l lg:border-none lg:backdrop-blur-0 lg:bg-white dark:lg:bg-gray-950 lg:static h-screen lg:h-auto transition-all ease-in-out`}
+          } origin-right lg:scale-x-100 fixed top-0 bottom-0 right-0 w-2/3 lg:w-auto p-3 lg:p-0 bg-blue-500/50 backdrop-blur border-l lg:border-none lg:backdrop-blur-0 lg:bg-white dark:lg:bg-gray-950 lg:static h-auto lg:h-16 transition-all ease-in-out`}
         >
           <div className="flex gap-1 flex-col items-start lg:items-center lg:flex-row">
             <button
