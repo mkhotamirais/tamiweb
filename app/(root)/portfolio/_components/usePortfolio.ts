@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import { menu } from "./menu";
+import { menu } from "./header";
 
 type SectionName = (typeof menu)[number]["label"];
 type PortoSayaState = {

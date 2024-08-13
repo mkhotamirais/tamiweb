@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { menu } from "./menu";
 import { usePortfolio } from "./usePortfolio";
+import { menu } from "./header";
 
 export default function useSectionView(label: (typeof menu)[number]["label"]) {
   const { setActiveSection, timeLastClick } = usePortfolio();

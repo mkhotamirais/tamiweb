@@ -5,7 +5,7 @@ import { FaBars, FaXmark } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { usePortfolio } from "./usePortfolio";
 
-const menu = [
+export const menu = [
   { hash: "#home", label: "home" },
   { hash: "#about", label: "about" },
   { hash: "#project", label: "project" },
