@@ -35,14 +35,14 @@ export default function Experience() {
   return (
     <section id="experience" ref={ref} className="scroll-mt-16 sm:scroll-mt-24 mx-3 py-8">
       <Title>Experience</Title>
-      <VerticalTimeline animate lineColor="">
+      <VerticalTimeline animate lineColor="rgba(6, 182, 212, 0.15)">
         {experienceList.map((exp, index) => (
           <React.Fragment key={index}>
             <VerticalTimelineElement
               visible
               className="text-gray-900 dark:text-white"
               contentStyle={{
-                background: theme === "dark" ? "#030712" : "#f3f4f6",
+                background: theme === "dark" ? "#030712" : "rgba(6, 182, 212, 0.15)",
                 boxShadow: "none",
                 border: "1px solid rgba(0,0,0,0.05)",
               }}

@@ -71,7 +71,7 @@ export default function Skill() {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            <Button asChild variant="outline" className="rounded-xl p-4">
+            <Button asChild variant="outline" className="rounded-xl p-4 bg-cyan-500/15">
               <Link href="/projects" className="flex flex-col justify-center items-center shadow  gap-2 h-fit">
                 <div className="text-2xl">
                   <item.icon />

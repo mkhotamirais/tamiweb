@@ -46,7 +46,7 @@ export default function Hero() {
           />
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} style={{ scale: scaleH1 }}>
-          <h1 className="text-2xl font-raleway leading-loose text-center sm:text-3xl max-w-lg md:max-w-xl mx-auto">
+          <h1 className="text-2xl font-raleway text-center max-w-lg md:max-w-xl mx-auto">
             I&apos;m <b>Mkhotami</b>, a <b>web developer</b> with expertise in <b>MERN</b> and <b>NextJs</b>. I build
             dynamic, <b>responsive web applications</b> and create seamless user experiences with efficient code.
           </h1>

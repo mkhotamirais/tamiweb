@@ -35,7 +35,7 @@ export function MeButtons() {
           <FaUser className="size-4" />
         </Link>
       </Button>
-      <Button asChild size="icon" className="rounded-full" variant="secondary">
+      <Button onClick={onClick} asChild size="icon" className="rounded-full" variant="secondary">
         <a title="linked account" href="https://www.linkedin.com/in/mkhotami-rais/">
           <FaLinkedin className="size-4" />
         </a>

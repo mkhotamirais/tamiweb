@@ -8,12 +8,13 @@ export function WelcomeButtons() {
   const { mm, openMm, closeMm, me, openMe, closeMe } = useMm();
   const onClick = () => {
     !mm ? openMm() : closeMm();
+    onClickMe();
   };
   const onClickMe = () => {
     !me ? openMe() : closeMe();
   };
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-col sm:flex-row gap-2">
       <Button onClick={onClickMe} variant="default" className="rounded-full w-32">
         About Me
       </Button>
