@@ -8,6 +8,7 @@ export const publicRoutes = [
   "/auth/new-verification",
   "/jikan-anime",
   "/product",
+  "/portfolio",
   // "/appwrite-text",
   // "/appwrite-text/**/*",
   // /^\/appwrite-text(\/.*)?$/,

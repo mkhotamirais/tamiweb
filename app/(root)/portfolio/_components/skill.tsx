@@ -59,7 +59,7 @@ export default function Skill() {
   return (
     <section id="skill" ref={ref} className="max-w-2xl mx-auto scroll-mt-16">
       <Title>My Skills</Title>
-      <div className="flex gap-3 flex-wrap justify-center">
+      <div className="flex gap-3 flex-wrap justify-center px-3">
         {skillList.map((item, i) => (
           <motion.div
             key={i}
