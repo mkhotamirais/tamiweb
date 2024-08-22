@@ -120,6 +120,7 @@ export function Projects({
   const pathname = usePathname();
   const [cari, setCari] = useState("");
   const [selectedBadge, setSelectedBadge] = useState<string[]>([]);
+
   const filteredProjectsMenu =
     pathname === "/projects"
       ? projectsMenu

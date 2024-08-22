@@ -9,6 +9,7 @@ export const publicRoutes = [
   "/jikan-anime",
   "/product",
   "/portfolio",
+  "/projects",
   // "/appwrite-text",
   // "/appwrite-text/**/*",
   // /^\/appwrite-text(\/.*)?$/,
